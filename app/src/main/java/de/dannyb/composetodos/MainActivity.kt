@@ -20,18 +20,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import de.dannyb.composetodos.navigation.SetupNavigation
 import de.dannyb.composetodos.ui.theme.ComposeToDosTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             ComposeToDosTheme(darkTheme = false) {
                 // A surface container using the 'background' color from the theme
+
+                navController = rememberNavController()
+                SetupNavigation(navController = navController)
+
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
                         .padding(24.dp),
                     color = MaterialTheme.colorScheme.background
                 ) {
@@ -54,7 +66,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             value = state,
             textStyle = TextStyle(color = MaterialTheme.colorScheme.onBackground),
             onValueChange = { it: String -> state = it },
-            modifier = modifier.fillMaxWidth()
+            modifier = modifier
+                .fillMaxWidth()
                 .padding(vertical = 12.dp),
             singleLine = true,
         )

@@ -1,10 +1,12 @@
 package de.dannyb.composetodos.data.repositories
 
+import dagger.hilt.android.scopes.ViewModelScoped
 import de.dannyb.composetodos.data.ToDoDao
 import de.dannyb.composetodos.data.models.ToDoTask
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+@ViewModelScoped
 class ToDoRepository @Inject constructor(
     private val toDoDao: ToDoDao
 ) {
